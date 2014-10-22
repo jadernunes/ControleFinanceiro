@@ -64,6 +64,9 @@ if($idMax <= 0 || $idMax == null || $idMax == "" || $idMax == "null" || $idMax =
                 else if($status == 1){
                     $status = "Usado";
                 }
+                else if($status == 2){
+                    $status = "Bloqueado";
+                }
                 ?>
                 <td style="border-style: groove;"><label><?php echo $status;?></label></td>
             </tr>

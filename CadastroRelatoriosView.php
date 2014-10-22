@@ -7,8 +7,8 @@ $classGeral = new classGeral();
 
 $onload = "";
 
-if(isset($_GET['idTurma'])){
-    $onload = "onload=loadDiv('detalheRelatorios.php?idTurma=".$_GET['idTurma']."','div_relatorios');";
+if(isset($_GET['idTurma']) && isset($_GET['idGrupo'])){
+    $onload = "onload=loadDiv('descricaoCampoGrupoRel.php?idGrupo=".$_GET['idGrupo']."&idTurma=".$_GET['idTurma']."','div_dados');";
 }
 
 ?>
@@ -44,11 +44,9 @@ if(isset($_GET['idTurma'])){
                <tr><td align="center">Selecione uma turma</td></tr>
                 <tr>
                     <td align="center">
-                        <select id="idTurma" name="idTurma" style="width: 200px;" onchange="loadDiv('detalheRelatorios.php?idTurma='+$(this).val(),'div_relatorios')" >
+                        <select id="idTurma" name="idTurma" style="width: 200px;" onchange="loadDiv('descricaoCampoGrupoRel.php?idTurma='+$(this).val(),'div_dados')" >
                             <option value="0" >Select</option>
                             <?php
-
-                            echo $_SESSION['user']['idUsuario'];
                             
                             $result = $classGeral->select('Select t.* From Turma t inner join UsuarioTurma ut on t.idTurma = ut.idTurma where ut.idUsuario = '.$_SESSION['user']['idUsuario']);
 
@@ -76,14 +74,8 @@ if(isset($_GET['idTurma'])){
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align='center'><input type="submit" value="Criar novo relatório"/></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
                     <td>
-                        <div id="div_relatorios"></div>
+                        <div id="div_dados"></div>
                     </td>
                 </tr>
             </table>
