@@ -7,6 +7,7 @@ $classGeral = new classGeral();
 
 $idTurma = 0;
 $idUserProfessor = 0;
+$idGrupo = 0;
 
 if(isset($_SESSION['user']) && isset($_GET['idTurma'])){
     $idUserProfessor = $_SESSION['user']['idUsuario'];
@@ -25,28 +26,28 @@ else if(!isset($_SESSION['user']) && !isset($_GET['idTurma'])){
 $onload = "";
 
 if(isset($_GET['idGrupo'])){
-    $onload = "loadDiv('detalheObjetivos.php?idGrupo=".$_GET['idGrupo']."&idTurma=".$_GET['idTurma']."','div_dados');";
+    $classGeral->loadDiv('detalheObjetivos.php?idGrupo='.$_GET['idGrupo'].'&idTurma='.$_GET['idTurma'], 'detalheObjetivo');
+    $idGrupo = $_GET['idGrupo'];
 }
 
+//echo 'idProfessor: '.$idUserProfessor;
+//echo '<br/>';
+//echo 'idTurma: '.$idTurma;
+//echo '<br/>';
+//echo 'idGrupo: '.$idGrupo;
+//echo '<br/>';
+//echo $onload;
 
-
-?>
-<script>
-    if(isVisible('campoSelect')){
-        loadDiv('detalheObjetivos.php?idGrupo='+<?php echo $_GET['idGrupo']?>+'&idTurma='+<?php echo $_GET['idTurma'];?>'\',\'div_dados\'');
-    }
-</script>
-    
-    
+?>    
 <div id='campoSelect'  >
     <table cellpadding=0 cellspacing=0 align="center" style="border-bottom: none;border-left: none;border-right: none;">
         <tr><td align="center">Selecione um Grupo</td></tr>
          <tr>
              <td align="center">
-                 <select id="idGrupo" name="idGrupo" style="width: 200px;" onchange="loadDiv('detalheObjetivos.php?idTurma=<?php echo $idTurma;?>','detalheObjetivo')" >
+                 <select id="idGrupo" name="idGrupo" style="width: 200px;text-align: center;" onchange="loadDiv('detalheObjetivos.php?idTurma=<?php echo $idTurma;?>&idGrupo='+$(this).val(),'detalheObjetivo')" >
                      <option value="0" >Select</option>
                      <?php
-                     $result = $classGeral->select('Select * From Grupo');
+                     $result = $classGeral->select('Select * From Grupo where status != 2');
                      foreach($result as $var => $valor){
                          $select = '';
                          if(isset($_GET['idGrupo'])){
@@ -54,8 +55,15 @@ if(isset($_GET['idGrupo'])){
                                 $select = 'selected="selected"';
                             }
                          }
+                         $status = $valor['status'];
+                        if($status == 0){
+                            $status = "Liberado";
+                        }
+                        else if($status == 1){
+                            $status = "Usado";
+                        }
                         ?>
-                        <option <?php echo $select;?> value="<?php echo $valor['identificadorGrupo'];?>" ><?php echo $valor['identificadorGrupo'];?></option>    
+                        <option <?php echo $select;?> value="<?php echo $valor['identificadorGrupo'];?>" ><?php echo $valor['identificadorGrupo'].' - '.$status;?></option>    
                         <?php
                      }
                      ?>

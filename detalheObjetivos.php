@@ -6,6 +6,7 @@ $classGeral = new classGeral();
 
 $idTurma = 0;
 $idUserProfessor = 0;
+$idGrupo = 0;
 
 if(isset($_SESSION['user']) && isset($_GET['idTurma'])){
     $idUserProfessor = $_SESSION['user']['idUsuario'];
@@ -21,14 +22,19 @@ else if(!isset($_SESSION['user']) && !isset($_GET['idTurma'])){
     $classGeral->alert("Usuário não logado e turma não selecionada");
 }
 
+if(isset($_GET['idGrupo'])){
+    $idGrupo = $_GET['idGrupo'];
+}
+
 //echo 'idProfessor: '.$idUserProfessor;
 //echo '<br/>';
 //echo 'idTurma: '.$idTurma;
+//echo '<br/>';
+//echo 'idGrupo: '.$idGrupo;
 
 //$classGeral->show($_GET);
 
-$queryO = 'Select * From Objetivo where idUsuarioProfessor = '.$idUserProfessor.' and idTurma = '.$idTurma.'';
-
+$queryO = 'Select * From Objetivo where idUsuarioProfessor = '.$idUserProfessor.' and idTurma = '.$idTurma.' and identificadorGrupo = '.$idGrupo;
 $resultObjetivos = $classGeral->select($queryO);
 
 ?>

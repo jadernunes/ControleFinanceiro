@@ -1,7 +1,7 @@
 <?php
 class classGeral {
     function connection(){
-        $con=mysqli_connect("br-cdbr-azure-south-a.cloudapp.net","b933c481c03b41","01deb663","myschool");
+        $con=mysqli_connect("localhost","myschool","admin","myschool");
         // Check connection
         if (mysqli_connect_errno()) {
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -56,6 +56,14 @@ class classGeral {
         }
     }
     
+    function loadDiv($pageName,$div){
+        echo '
+            <script>
+                $(\'#'.$div.'\').load(\''.$pageName.'\');
+            </script>
+        ';
+    }
+            
     function alert($msg = ''){
         echo '
             <script>
