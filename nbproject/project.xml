@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.php.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/php-project/1">
+            <name>MySchool</name>
+        </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Cabeçalho</word>
+            <word>Cabeçálho</word>
+            <word>Cadastro</word>
+            <word>corpo</word>
+            <word>Criar</word>
+            <word>Código</word>
+            <word>Descrição</word>
+            <word>não</word>
+            <word>preenchidos</word>
+            <word>Professores</word>
+            <word>Relatórios</word>
+        </spellchecker-wordlist>
+    </configuration>
+</project>
