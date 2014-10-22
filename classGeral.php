@@ -1,7 +1,7 @@
 <?php
 class classGeral {
     function connection(){
-        $con=mysqli_connect("localhost","myschool","admin","myschool");
+        $con=mysqli_connect("us-cdbr-azure-west-a.cloudapp.net","bbaf5c81c72b18","3908fd2f","myschool");
         // Check connection
         if (mysqli_connect_errno()) {
           echo "Failed to connect to MySQL: " . mysqli_connect_error();

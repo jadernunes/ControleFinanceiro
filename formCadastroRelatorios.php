@@ -49,9 +49,11 @@ for($xA = 0;$xA < count($alunos);$xA++){
     
     $idAluno = $alunos[$xA];
     $data = date('d/m/Y');
-    $codigo = 'A'.$idAluno.'-T'.$idTurma.'-P'.$idUserProfessor.'-'.$data.'';
+    $codigo = 'A'.$idAluno.'-T'.$idTurma.'-P'.$idUsuarioProfessor.'-'.$data.'';
     
-    $sqlInsRel = 'INSERT INTO myschool.Relatorio (idUsuarioProfessor, idUsuarioAluno,idTurma, observacao, statusResposta, codigo, identificadorGrupo) VALUES ('.$idUsuarioProfessor.','.$alunos[$xA].','.$idTurma.',"",0,'.$codigo.','.$idGrupo.');';
+    $sqlInsRel = 'INSERT INTO myschool.Relatorio (idUsuarioProfessor, idUsuarioAluno,idTurma, observacao, statusResposta, codigo, identificadorGrupo) VALUES ('.$idUsuarioProfessor.','.$alunos[$xA].','.$idTurma.',"",0,\''.$codigo.'\','.$idGrupo.');';
+//    echo '<br/>';
+//    echo $sqlInsRel;
     $idRelatorio = $classGeral->insert($sqlInsRel);
     
     for($yO = 0;$yO < count($arrayObjetivos);$yO++){
