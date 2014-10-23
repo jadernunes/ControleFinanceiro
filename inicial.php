@@ -55,7 +55,7 @@ $user = $_SESSION['user'];
                                 <td ><label>&nbsp;</label></td>
                                 <td><input type="button" value="Preencher Relatório" onclick="loadPagina('PreencherRelatorioView.php')"/></td>
                                 <td ><label>&nbsp;</label></td>
-                                <td><input type="button" value="Visualizar Relatório" onclick=""/></td>
+                                <td><input type="button" value="Visualizar Relatório" onclick="loadPagina('VisualizarRelatorioView.php')"/></td>
                                 <td ><label>&nbsp;</label></td>
                                 <td><input type="button" value="Corrigir Relatório" onclick=""/></td>
                                 <td ><label>&nbsp;</label></td>

@@ -7,8 +7,10 @@ $classGeral = new classGeral();
 $idTurma = $_POST['idTurma'];
 $idGrupo = $_POST['idGrupo'];
 $idRelatorio = $_POST['idRelatorio'];
+$observacao = $_POST['observacao'];
 
 //$classGeral->show($_POST);
+//echo $observacao;
 //break;
 
 
@@ -39,6 +41,10 @@ if(isset($_POST['btCancelar'])){
         //- trocar statusResposta do relatorio para 2;
         $query = 'update Relatorio set statusResposta = 2 where idRelatorio = '.$idRelatorio;
         $classGeral->insert($query);
+        
+        $query = 'update Relatorio set observacao = \''.$observacao.'\' where idRelatorio = '.$idRelatorio;
+        $classGeral->insert($query);
+        
         //- preenche os objetivos relatórios recebidos
         for($i = 0;$i < $totalObjetivosRecebidos;$i++){
             $query = 'update RelatorioObjetivo set status = '.$arrayObjetivos[$i][1].' where idObjetivo = '.$arrayObjetivos[$i][0].' and idRelatorio = '.$idRelatorio;
@@ -53,9 +59,12 @@ if(isset($_POST['btCancelar'])){
         $query = 'update Relatorio set statusResposta = 1 where idRelatorio = '.$idRelatorio;
         $classGeral->insert($query);
         
+        $query = 'update Relatorio set observacao = \''.$observacao.'\' where idRelatorio = '.$idRelatorio;
+        $classGeral->insert($query);
+        
         //- preenche os objetivos relatórios recebidos
         for($i = 0;$i < $totalObjetivosRecebidos;$i++){
-            $query = 'update RelatorioObjetivo set status = '.$arrayObjetivos[$i][1].' where idObjetivo = '.$arrayObjetivos[$i][0];
+            $query = 'update RelatorioObjetivo set status = '.$arrayObjetivos[$i][1].' where idObjetivo = '.$arrayObjetivos[$i][0].' and idRelatorio = '.$idRelatorio;
             $classGeral->insert($query);
             
             $query = 'update Objetivo set editavel = 0 where idObjetivo = '.$arrayObjetivos[$i][0];
