@@ -12,6 +12,8 @@ $result = $classGeral->select('Select * from usuario u where u.idTipoUsuario = 5
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="functionGeral.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <title>My School</title>
     </head>
     <body>
         <table  align="center" style=" background-color: darkgray;width: 100%;border: none;">
