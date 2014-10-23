@@ -4,6 +4,18 @@ include "./classGeral.php";
 
 $classGeral = new classGeral();
 
+//$classGeral->show($_GET);
+$onload = '';
+
+if(isset($_GET['idTurma']) && isset($_GET['idGrupo']) && isset($_GET['idRelatorio'])){
+    $onload = "onload=loadDiv('descricaoCampoRelGrupo.php?idGrupo=".$_GET['idGrupo']."&idTurma=".$_GET['idTurma']."&idRelatorio=".$_GET['idRelatorio']."','div_dados');";
+    $idGrupo = $_GET['idGrupo'];
+}else if(isset($_GET['idTurma']) && isset($_GET['idGrupo']) && !isset($_GET['idRelatorio'])){
+    $onload = "onload=loadDiv('descricaoCampoRelGrupo.php?idGrupo=".$_GET['idGrupo']."&idTurma=".$_GET['idTurma']."','div_dados');";
+    $idGrupo = $_GET['idGrupo'];
+}
+
+
 ?>
 <html>
     <head>
@@ -12,7 +24,7 @@ $classGeral = new classGeral();
         <script src="functionGeral.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     </head>
-    <body>
+    <body <?php echo $onload;?>>
         <table  align="center" style=" background-color: darkgray;width: 100%;border: none;">
             <tr>
                 <td  align="left">

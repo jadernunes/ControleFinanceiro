@@ -20,3 +20,16 @@ function isVisible(campo)
     
   return true;
 }
+
+function setValor(campo,valor){
+    document.getElementById(''+campo+'').setAttribute('value',''+valor+'');
+}
+
+function setVisible(campo,status){
+    if(status == true){
+        $('#'+campo+'').show();
+    }
+    else if(status == false){
+        $('#'+campo+'').hide();
+    }
+}
