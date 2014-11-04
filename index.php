@@ -1,6 +1,6 @@
 <?php
-include "./config.php";
-include "./classGeral.php";
+include "Model/config.php";
+include "Model/classGeral.php";
 
 $classGeral = new classGeral();
 $result = $classGeral->select('Select * From TipoUsuario');
@@ -21,12 +21,12 @@ $result = $classGeral->select('Select * From TipoUsuario');
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="functionGeral.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="Model/functionGeral.js"></script>
+        <script src="ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
         <title>My School</title>
     </head>
     <body>
-        <form action="formPrinc.php" method="post">
+        <form action="./Persistence/formPrinc.php" method="post">
             <table align='center' style="height: 100%;">
                 <tr>
                     <td valign='left'>

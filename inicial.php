@@ -1,5 +1,5 @@
 <?php
-include "./config.php";
+include "./Model/config.php";
 
 $user = $_SESSION['user'];
 ?>
@@ -7,8 +7,8 @@ $user = $_SESSION['user'];
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="functionGeral.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="Model/functionGeral.js"></script>
+        <script src="ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
         <title>My School</title>
     </head>
     <body>
@@ -20,61 +20,61 @@ $user = $_SESSION['user'];
                             <?php 
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){ 
                             ?>
-                                <td><input type="button" value="Cadastro Professor" onclick="loadPagina('CadastroProfessorView.php')"/></td>
+                                <td><input type="button" value="Cadastro Professor" onclick="loadPagina('View/CadastroProfessorView.php')"/></td>
                             <?php 
                             }
                             
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                             ?>
-                                <td><input type="button" value="Cadastro Aluno" onclick="loadPagina('CadastroAlunoView.php')"/></td>
+                                <td><input type="button" value="Cadastro Aluno" onclick="loadPagina('View/CadastroAlunoView.php')"/></td>
                             <?php 
                             }
                             
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                             ?>
-                                <td><input type="button" value="Cadastro Secretario" onclick="loadPagina('CadastroSecretarioView.php')"/></td>
+                                <td><input type="button" value="Cadastro Secretario" onclick="loadPagina('View/CadastroSecretarioView.php')"/></td>
                             <?php 
                             }
                             
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                             ?>
-                                <td><input type="button" value="Cadastro Diretor" onclick="loadPagina('CadastroDiretorView.php')"/></td>
+                                <td><input type="button" value="Cadastro Diretor" onclick="loadPagina('View/CadastroDiretorView.php')"/></td>
                             <?php 
                             }
                             
                             if($user['idTipoUsuario'] == 1){
                             ?>
-                                <td><input type="button" value="Gerar Código de Grupo" onclick="loadPagina('GerarCodigoObjetivosView.php')"/></td>
-                                <td><input type="button" value="Cadastro Objetivos" onclick="loadPagina('CadastroObjetivosView.php')"/></td>
-                                <td><input type="button" value="Criar Relatórios" onclick="loadPagina('CadastroRelatoriosView.php')"/></td>
-                                <td><input type="button" value="Preencher Relatório" onclick="loadPagina('PreencherRelatorioView.php')"/></td>
-                                <td><input type="button" value="Visualizar Relatório" onclick="loadPagina('VisualizarRelatorioView.php')"/></td>
+                                <td><input type="button" value="Gerar Código de Grupo" onclick="loadPagina('View/GerarCodigoObjetivosView.php')"/></td>
+                                <td><input type="button" value="Cadastro Objetivos" onclick="loadPagina('View/CadastroObjetivosView.php')"/></td>
+                                <td><input type="button" value="Criar Relatórios" onclick="loadPagina('View/CadastroRelatoriosView.php')"/></td>
+                                <td><input type="button" value="Preencher Relatório" onclick="loadPagina('View/PreencherRelatorioView.php')"/></td>
+                                <td><input type="button" value="Visualizar Relatório" onclick="loadPagina('View/VisualizarRelatorioView.php')"/></td>
                                 <td><input type="button" value="Corrigir Relatório" onclick=""/></td>
                             <?php 
                             }
                             if($user['idTipoUsuario'] == 5){
                             ?>
-                                <td><input type="button" value="Avaliar Relatorio" onclick="loadPagina('AvaliarRelatorioView.php')"/></td>
+                                <td><input type="button" value="Avaliar Relatorio" onclick="loadPagina('View/AvaliarRelatorioView.php')"/></td>
                             <?php 
                             }
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                             ?>
-                                <td><input type="button" value="Cadastro Supervisor" onclick="loadPagina('CadastroSupervisorView.php')"/></td>
+                                <td><input type="button" value="Cadastro Supervisor" onclick="loadPagina('View/CadastroSupervisorView.php')"/></td>
                             <?php 
                             }
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                             ?>
-                                <td><input type="button" value="Cadastro Turma" onclick="loadPagina('CadastroTurmaView.php')"/></td>
+                                <td><input type="button" value="Cadastro Turma" onclick="loadPagina('View/CadastroTurmaView.php')"/></td>
                             <?php 
                             }
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                             ?>
-                                <td><input type="button" value="Lincar Prossor em Turma" onclick="loadPagina('LincarProfessorTurmaView.php')"/></td>
+                                <td><input type="button" value="Lincar Prossor em Turma" onclick="loadPagina('View/LincarProfessorTurmaView.php')"/></td>
                             <?php 
                             }
                             if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                             ?>
-                                <td ><input type="button" value="Lincar Aluno em Turma" onclick="loadPagina('LincarAlunoTurmaView.php')"/></td>
+                                <td ><input type="button" value="Lincar Aluno em Turma" onclick="loadPagina('View/LincarAlunoTurmaView.php')"/></td>
                             <?php 
                             }
                             ?>
