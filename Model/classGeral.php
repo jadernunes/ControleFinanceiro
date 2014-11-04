@@ -2,8 +2,23 @@
 class classGeral {
     function connection(){
         
+        $servidorAzure = "br-cdbr-azure-south-a.cloudapp.net";
+        $usuarioAzure = "b933c481c03b41";
+        $senhaAzure = "01deb663";
         
-        $con=mysqli_connect("localhost","myschool","admin","myschool");
+        $servidorLocal = "localhost";
+        $usuarioLocal = "myschool";
+        $senhaLocal = "admin";
+        
+        $servidor = $servidorAzure;
+        $usuario = $usuarioAzure;
+        $senha = $senhaAzure;
+        
+//        $servidor = $servidorLocal;
+//        $usuario = $usuarioLocal;
+//        $senha = $senhaLocal;
+        
+        $con=mysqli_connect($servidor,$usuario,$senha,"myschool");
         // Check connection
         if (mysqli_connect_errno()) {
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
