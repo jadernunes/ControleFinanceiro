@@ -2,14 +2,15 @@
 class classGeral {
     function connection(){
         
-        $servidorAzure = "us-cdbr-azure-west-a.cloudapp.net09:55";
+        $servidorAzure = "us-cdbr-azure-west-a.cloudapp.net";
         $usuarioAzure = "bbaf5c81c72b18";
         $senhaAzure = "3908fd2f";
         
         $servidorLocal = "localhost";
         $usuarioLocal = "myschool";
         $senhaLocal = "admin";
-        
+
+//Descomentar para conexões com o Azure       
         $servidor = $servidorAzure;
         $usuario = $usuarioAzure;
         $senha = $senhaAzure;
