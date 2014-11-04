@@ -52,7 +52,7 @@ class classGeral {
         {
             echo '
                 <script>
-                    window.location="Index.php"
+                    window.location="../Index.php"
                 </script>
             ';
         }
