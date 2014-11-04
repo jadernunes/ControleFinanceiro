@@ -10,11 +10,11 @@ class classGeral {
         $usuarioLocal = "myschool";
         $senhaLocal = "admin";
         
-        $servidor = $servidorAzure;
+//        $servidor = $servidorAzure;
         $usuario = $usuarioAzure;
         $senha = $senhaAzure;
         
-//        $servidor = $servidorLocal;
+        $servidor = $servidorLocal;
 //        $usuario = $usuarioLocal;
 //        $senha = $senhaLocal;
         
