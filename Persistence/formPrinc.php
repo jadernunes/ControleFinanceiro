@@ -3,17 +3,19 @@ include "../Model/config.php";
 include "../Model/classGeral.php";
 
 $classGeral = new classGeral();
+
+if(isset($_GET['type']) && isset($_GET['username']) && isset($_GET['password'])){
+    $_POST['type'] = $_GET['type'];
+    $_POST['username'] = $_GET['username'];
+    $_POST['password'] = $_GET['password'];
+}
+
+
 $result = $classGeral->select('Select * From Usuario where login like \''.$_POST['username'].'\' and password like \''.$_POST['password'].'\'');
 
 $type = "";
 $username = "";
 $passaword = "";
-
-
-//echo '<br/>';
-//echo '<pre>';
-//print_r($_POST);
-//echo '</pre>';
 
 
 if($_POST['type']){

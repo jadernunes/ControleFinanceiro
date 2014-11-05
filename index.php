@@ -5,18 +5,28 @@ include "Model/classGeral.php";
 $classGeral = new classGeral();
 $result = $classGeral->select('Select * From TipoUsuario');
 
-//echo '<br/>';
-//echo '<pre>';
-//print_r($result);
-//echo '</pre>';
+
 
 //foreach($result as $var => $valor){
 //    echo '<br/>';
 //    echo $valor['idTipoUsuario'];
 //}
 
-?>
 
+
+$onload = "";
+if(isset($_SESSION['user']))
+{
+    
+    if(isset($_SESSION['user']['idTipoUsuario']) && isset($_SESSION['user']['login']) && isset($_SESSION['user']['password'])){
+        $onload = "onload=loadPagina('Persistence/formPrinc.php?type=".$_SESSION['user']['idTipoUsuario']."&username=".$_SESSION['user']['login']."&password=".$_SESSION['user']['password']."');";
+    }
+}
+else
+{
+    $classGeral->registrarAcesso();
+}
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -25,7 +35,8 @@ $result = $classGeral->select('Select * From TipoUsuario');
         <script src="ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
         <title>My School</title>
     </head>
-    <body>
+    <body <?php echo $onload;?>>
+        <?php if(!isset($_SESSION['user'])){?>
             <table align='center' style="height: 100%;">
                 <tr>
                     <td valign='left'>
@@ -37,10 +48,6 @@ $result = $classGeral->select('Select * From TipoUsuario');
                                                     <select id="idType" name="type" style="width: 100px;">
                                                         <option value="0">Select</option>
                                                         <?php
-    //                                                    foreach($result as $var => $valor){
-    //                                                        echo $valor['idTipoUsuario'];
-    //                                                    }
-
                                                         foreach($result as $var => $valor){
                                                             ?>
                                                         <option value="<?php echo $valor['idTipoUsuario'];?>"><?php echo $valor['descricao'];?></option>
@@ -85,5 +92,6 @@ $result = $classGeral->select('Select * From TipoUsuario');
                     </td>
                 </tr>
             </table>
+        <?php }?>
     </body>
 </html>
