@@ -11,14 +11,14 @@ class classGeral {
         $senhaLocal = "admin";
 
 //Descomentar para conexões com o Azure       
-        $servidor = $servidorAzure;
-        $usuario = $usuarioAzure;
-        $senha = $senhaAzure;
+//        $servidor = $servidorAzure;
+//        $usuario = $usuarioAzure;
+//        $senha = $senhaAzure;
         
 //Descomentar para conexões locais
-//        $servidor = $servidorLocal;
-//        $usuario = $usuarioLocal;
-//        $senha = $senhaLocal;
+        $servidor = $servidorLocal;
+        $usuario = $usuarioLocal;
+        $senha = $senhaLocal;
         
         $con=mysqli_connect($servidor,$usuario,$senha,"myschool");
         // Check connection
@@ -113,5 +113,11 @@ class classGeral {
         $string = preg_replace("/[][><}{)(:;,!?*%~^`&#@]/", "", $string);
         $string = preg_replace("/ /", "_", $string);
         return $string;
+    }
+    
+    function getMacAddress(){
+        $interfaceEthernet = shell_exec("ifconfig en0 ether");
+        $macAddress = trim(split('ether',$interfaceEthernet)[1]);
+        return $macAddress;
     }
 }
