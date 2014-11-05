@@ -11,14 +11,14 @@ class classGeral {
         $senhaLocal = "admin";
 
 //Descomentar para conexões com o Azure       
-        $servidor = $servidorAzure;
-        $usuario = $usuarioAzure;
-        $senha = $senhaAzure;
+//        $servidor = $servidorAzure;
+//        $usuario = $usuarioAzure;
+//        $senha = $senhaAzure;
         
 //Descomentar para conexões locais
-//        $servidor = $servidorLocal;
-//        $usuario = $usuarioLocal;
-//        $senha = $senhaLocal;
+        $servidor = $servidorLocal;
+        $usuario = $usuarioLocal;
+        $senha = $senhaLocal;
         
         $con=mysqli_connect($servidor,$usuario,$senha,"myschool");
         // Check connection
@@ -115,9 +115,32 @@ class classGeral {
         return $string;
     }
     
-    function getMacAddress(){
-        $interfaceEthernet = shell_exec("ifconfig en0 ether");
-        $macAddress = trim(split('ether',$interfaceEthernet)[1]);
-        return $macAddress;
-    }
+//    function getMacAddress(){
+//        $interfaceEthernet = shell_exec("ifconfig en0 ether");
+//        $macAddress = trim(split('ether',$interfaceEthernet)[1]);
+//        return $macAddress;
+//    }
+//    
+//    function registrarAcesso(){
+//        
+//        date_default_timezone_set('America/Sao_Paulo');
+//        $data = date('d-m-Y');
+//        $hora = date('H:i:s');
+//        
+//        $this->show($data.' - '.$hora);
+//        
+//        $query = 'INSERT INTO AcessosSistema (data,hora,macAddress) VALUES (\''.$data.'\',\''.$hora.'\',\''.$this.getMacAddress().'\');';
+//        $this->insert($query);
+//        
+//    }
+//    
+//    function getAcessosDia(){
+//        date_default_timezone_set('America/Sao_Paulo');
+//        $data = date('d-m-Y');
+//        
+//        $query = 'SELECT * FROM AcessosSistema WHERE data like \''.$data.'\'';
+//        $result = $this->insert($query);
+//        
+//        return $result;
+//    }
 }
