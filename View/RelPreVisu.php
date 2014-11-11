@@ -11,7 +11,7 @@ $idTurma = $_GET['idTurma'];
 $idGrupo = $_GET['idGrupo'];
 
 if(isset($_GET['idRelatorio'])){
-    $classGeral->loadDiv('detalhePreencRelatorio.php?idGrupo='.$_GET['idGrupo'].'&idTurma='.$_GET['idTurma'].'&idRelatorio='.$_GET['idRelatorio'], 'detalheMostraRelatorio');
+    $classGeral->loadDiv('RelPreVisuDetalhe.php?idGrupo='.$_GET['idGrupo'].'&idTurma='.$_GET['idTurma'].'&idRelatorio='.$_GET['idRelatorio'], 'detalheMostraRelatorio');
     $idGrupo = $_GET['idGrupo'];
 }
 
@@ -22,11 +22,11 @@ if(isset($_GET['idRelatorio'])){
          <tr>
              <td align="center">
                  <?php
-                 $sq = 'Select * From Relatorio r where idUsuarioProfessor = '.$idUserProfessor.' and idTurma = '.$idTurma.' and identificadorGrupo = '.$idGrupo.' and (statusResposta = 0 or statusResposta = 1)';
+                 $sq = 'Select * From Relatorio r where idUsuarioProfessor = '.$idUserProfessor.' and idTurma = '.$idTurma.' and identificadorGrupo = '.$idGrupo.' and statusResposta = 2';
 //                     echo $sq.'<br/>';
                  ?>
                  
-                 <select id="idRelatorio" name="idRelatorio" style="width: 200px;text-align: center;" onchange="loadDiv('detalheVisuRelPreencRelatorio.php?idGrupo=<?php echo $idGrupo;?>&idTurma=<?php echo $idTurma;?>&idRelatorio='+$(this).val(),'detalheMostraRelatorio');//this.disabled = true;" >
+                 <select id="idRelatorio" name="idRelatorio" style="width: 200px;text-align: center;" onchange="loadDiv('RelPreVisuDetPreench.php?idGrupo=<?php echo $idGrupo;?>&idTurma=<?php echo $idTurma;?>&idRelatorio='+$(this).val(),'detalheMostraRelatorio');//this.disabled = true;" >
                      <option value="0" >Select</option>
                      <?php
                      

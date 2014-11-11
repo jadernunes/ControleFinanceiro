@@ -6,19 +6,24 @@
             <name>MySchool</name>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Acessos</word>
             <word>Cabeçalho</word>
             <word>Cabeçálho</word>
             <word>Cadastro</word>
             <word>corpo</word>
+            <word>Correção</word>
             <word>Criar</word>
             <word>Código</word>
             <word>Descrição</word>
+            <word>Dia</word>
+            <word>Mês</word>
             <word>não</word>
             <word>Observação</word>
             <word>preenchidos</word>
             <word>Professores</word>
             <word>Relatório</word>
             <word>Relatórios</word>
+            <word>Sistema</word>
             <word>Viisializar</word>
         </spellchecker-wordlist>
     </configuration>

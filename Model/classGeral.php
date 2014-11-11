@@ -20,6 +20,7 @@ class classGeral {
 //        $usuario = $usuarioLocal;
 //        $senha = $senhaLocal;
         
+        
         $con=mysqli_connect($servidor,$usuario,$senha,"myschool");
         // Check connection
         if (mysqli_connect_errno()) {

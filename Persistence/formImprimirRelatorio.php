@@ -15,7 +15,7 @@ if(isset($_POST['btImprimeGrupo'])){
     $idGrupo = $_POST['idGrupo'];
     
     // pega os relatorios
-    $query = 'Select * From Relatorio r where idUsuarioProfessor = '.$idUserProfessor.' and idTurma = '.$idTurma.' and identificadorGrupo = '.$idGrupo.' and (statusResposta = 2 or statusResposta = 1)';
+    $query = 'Select * From Relatorio r where idUsuarioProfessor = '.$idUserProfessor.' and idTurma = '.$idTurma.' and identificadorGrupo = '.$idGrupo.' and (statusResposta = 0 or statusResposta = 1)';
     
     $result = $classGeral->select($query);
     
