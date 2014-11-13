@@ -1,6 +1,6 @@
 <?php
-include "Model/config.php";
-include "Model/classGeral.php";
+include "./Model/config.php";
+include "./Model/classGeral.php";
 $classGeral = new classGeral();
 $result = $classGeral->select('Select * From TipoUsuario');
 
