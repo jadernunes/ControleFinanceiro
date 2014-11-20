@@ -87,7 +87,7 @@ $user = $_SESSION['user'];
                         <td align="right">
                             <table  align="right" cellspacing='0' style=" background-color: darkgray;width: 100%;border: none; margin: none;">
                                 <tr>
-                                    <td  align="right"><label><?php echo $user['login'];?>&nbsp;</label><input type="submit" value='Logout'/></td>
+                                    <td  align="right"><label><?php echo $user['nome'];?>&nbsp;</label><input type="submit" value='Logout'/></td>
                                 </tr>
                             </table>
                         </td>

@@ -3,7 +3,7 @@ include "../Model/config.php";
 include "../Model/classGeral.php";
 
 $classGeral = new classGeral();
-$result = $classGeral->select('Select * from usuario u where u.idTipoUsuario = 2');
+$result = $classGeral->select('Select * from usuario u where u.idTipoUsuario = 2 and ativo = 1');
 
 ?>
 <html>
@@ -45,29 +45,33 @@ $result = $classGeral->select('Select * from usuario u where u.idTipoUsuario = 2
                 <tr><td></td><td align="center"><input type="submit" value="ADD"/></td></tr>
                 <tr><td ><label>&nbsp;</label></td></tr>
             </table>
-        </form>
-        <table cellpadding=0 cellspacing=0 align="center" style="border-bottom: none;border-left: none;border-right: none;">
-            <tr><td align="center">Alunos</td></tr>
-            <tr>
-                <td align="center">
-                    <table  cellpadding=0 cellspacing=0 align="center" style="border-style: groove;width: 100%;">
-                        <tr>
-                            <td align="center" >Nome</td>
-                            <td align="center" >email</td>
-                        </tr>
-                        <?php
-                        foreach($result as $var => $valor){
-                        ?>
+            <table cellpadding=0 cellspacing=0 align="center" style="border-bottom: none;border-left: none;border-right: none;">
+                <tr><td align="center">Alunos</td></tr>
+                <tr>
+                    <td align="center">
+                        <table  cellpadding=0 cellspacing=0 align="center" style="border-style: groove;width: 100%;">
                             <tr>
-                                <td align="center" style="width: 100px;border-style: ridge;border-bottom: none;border-left: none;border-right: none;"><label><?php echo $valor['nome'];?></label></td>
-                                <td align="center" style="width: 200px;border-style: ridge;border-bottom: none;border-right: none;"><label><?php echo $valor['login'];?></label></td>
+                                <td align="center" ></td>
+                                <td align="center" ></td>
+                                <td align="center" >Nome</td>
+                                <td align="center" >email</td>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                            <?php
+                            foreach($result as $var => $valor){
+                            ?>
+                                <tr>
+                                    <td ><input type="submit" id="radioIdUser" name="radioIdUser<?php echo $valor['idUsuario'];?>" value="Excluir"/></td>
+                                    <td ><input type="submit" id="radioEditIdUser" name="radioEditIdUser<?php echo $valor['idUsuario'];?>" value="Editar"/></td>
+                                    <td align="center" style="width: 100px;border-style: ridge;border-bottom: none;border-left: none;border-right: none;"><label><?php echo $valor['nome'];?></label></td>
+                                    <td align="center" style="width: 200px;border-style: ridge;border-bottom: none;border-right: none;"><label><?php echo $valor['login'];?></label></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
