@@ -11,11 +11,15 @@ $result = $classGeral->select('Select * From TipoUsuario');
 //    echo $valor['idTipoUsuario'];
 //}
 
+//$classGeral->show($_SESSION);
+
 $onload = "";
 if(isset($_SESSION['user']))
 {
     if(isset($_SESSION['user']['idTipoUsuario']) && isset($_SESSION['user']['login']) && isset($_SESSION['user']['password'])){
-        $onload = "onload=loadPagina('Persistence/formPrinc.php?type=".$_SESSION['user']['idTipoUsuario']."&username=".$_SESSION['user']['login']."&password=".$_SESSION['user']['password']."');";
+//        if($_SESSION['user']['idTipoUsuario'] > 0 && strlen($_SESSION['user']['login']) > 0 && strlen($_SESSION['user']['password']) > 0){
+            $onload = "onload=loadPagina('Persistence/formPrinc.php?type=".$_SESSION['user']['idTipoUsuario']."&username=".$_SESSION['user']['login']."&password=".$_SESSION['user']['password']."');";
+//        }
     }
 }
 else
@@ -46,7 +50,9 @@ else
         <title>My School</title>
     </head>
     <body <?php echo $onload;?> >
-        <?php if(!isset($_SESSION['user'])){?>
+        <?php
+        if(!isset($_SESSION['user'])){
+            ?>
             <table align='center' style="height: 100%;">
                 <tr>
                     <td valign='left'>
@@ -112,6 +118,6 @@ else
                     </td>
                 </tr>
             </table>
-        <?php }?>
+        <?php  }?>
     </body>
 </html>

@@ -11,8 +11,9 @@ if(isset($_GET['type']) && isset($_GET['username']) && isset($_GET['password']))
     $_POST['password'] = $_GET['password'];
 }
 
-
 $result = $classGeral->select('Select * From Usuario where login like \''.$_POST['username'].'\' and password like \''.$_POST['password'].'\' and ativo = 1');
+
+
 
 $type = "";
 $username = "";
@@ -36,22 +37,18 @@ if($_POST['password'])
 
 if($result)
 {
+    $i = 0;
     foreach($result as $var => $valor)
     {
         if($valor['idTipoUsuario'] == $type && $valor['login'] == $username && $valor['password'] == $passaword)
         {
             $_SESSION['user'] = $valor;
+            
+            
+            
             echo '
                 <script>
                     window.location="../Inicial.php"
-                </script>
-            ';
-        }
-        else
-        {
-            echo '
-                <script>
-                    window.location="../Index.php"
                 </script>
             ';
         }

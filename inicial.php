@@ -72,12 +72,12 @@ $user = $_SESSION['user'];
                                     }
                                     if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                                     ?>
-                                        <td><input type="button" value="Lincar Prossor em Turma" onclick="loadPagina('View/LincarProfessorTurmaView.php')"/></td>
+                                        <td><input type="button" value="Linkar Professor em Turma" onclick="loadPagina('View/LincarProfessorTurmaView.php')"/></td>
                                     <?php 
                                     }
                                     if($user['idTipoUsuario'] == 3 || $user['idTipoUsuario'] == 4){
                                     ?>
-                                        <td ><input type="button" value="Lincar Aluno em Turma" onclick="loadPagina('View/LincarAlunoTurmaView.php')"/></td>
+                                        <td ><input type="button" value="Linkar Aluno em Turma" onclick="loadPagina('View/LincarAlunoTurmaView.php')"/></td>
                                     <?php 
                                     }
                                     ?>
