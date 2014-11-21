@@ -118,7 +118,7 @@ class classGeral {
     
     function getMacAddress(){
         $interfaceEthernet = shell_exec("ifconfig en0 ether");
-        $macAddress = trim(split('ether',$interfaceEthernet)[1]);
+        $macAddress = trim(split('ether',$interfaceEthernet)[0]);
         return $macAddress;
     }
 //    
