@@ -49,7 +49,7 @@ else
         <script src="ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
         <title>My School</title>
     </head>
-    <body <?php echo $onload;?> >
+    <body <?php echo $onload;?> style="padding: 0;margin: 0;">
         <?php
         if(!isset($_SESSION['user'])){
             ?>

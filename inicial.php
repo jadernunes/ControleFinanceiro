@@ -11,7 +11,7 @@ $user = $_SESSION['user'];
         <script src="ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
         <title>My School</title>
     </head>
-    <body>
+    <body style="padding: 0;margin: 0;">
             <form action="./Persistence/formLogout.php" method="post">
                 <table  align="center" style=" background-color: darkgray;width: 100%;border: none;">
                     <tr >

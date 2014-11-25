@@ -15,7 +15,7 @@ $result = $classGeral->select('Select * from usuario u where u.idTipoUsuario = 3
         <script src="../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <title>My School</title>
     </head>
-    <body>
+    <body style="padding: 0;margin: 0;">
         <table  align="center" style=" background-color: darkgray;width: 100%;border: none;">
             <tr>
                 <td  align="left">

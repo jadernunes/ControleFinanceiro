@@ -25,7 +25,7 @@ if(isset($_GET['idTurma']) && isset($_GET['idGrupo']) && isset($_GET['idRelatori
         <script src="../ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
         <title>My School</title>
     </head>
-    <body <?php echo $onload;?>>
+    <body <?php echo $onload;?> style="padding: 0;margin: 0;">
         <table  align="center" style=" background-color: darkgray;width: 100%;border: none;">
             <tr>
                 <td  align="left">
