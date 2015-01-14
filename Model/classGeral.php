@@ -1,24 +1,20 @@
 <?php
 class classGeral {
     function connection(){
-        
-        $servidorAzure = "us-cdbr-azure-west-a.cloudapp.net";
-        $usuarioAzure = "bbaf5c81c72b18";
-        $senhaAzure = "3908fd2f";
-        
+                
         $servidorLocal = "localhost";
         $usuarioLocal = "myschool";
         $senhaLocal = "admin";
 
 //Descomentar para conexões com o Azure       
-        $servidor = $servidorAzure;
-        $usuario = $usuarioAzure;
-        $senha = $senhaAzure;
+//        $servidor = $servidorAzure;
+//        $usuario = $usuarioAzure;
+//        $senha = $senhaAzure;
         
 //Descomentar para conexões locais
-//        $servidor = $servidorLocal;
-//        $usuario = $usuarioLocal;
-//        $senha = $senhaLocal;
+        $servidor = $servidorLocal;
+        $usuario = $usuarioLocal;
+        $senha = $senhaLocal;
         
         
         $con=mysqli_connect($servidor,$usuario,$senha,"myschool");
@@ -118,7 +114,7 @@ class classGeral {
     
     function getMacAddress(){
         $interfaceEthernet = shell_exec("ifconfig en0 ether");
-        $macAddress = trim(split('ether',$interfaceEthernet)[0]);
+        $macAddress = trim(split('ether',$interfaceEthernet)[1]);
         return $macAddress;
     }
 //    

@@ -3,28 +3,27 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-            <name>MySchool</name>
+            <name>ControleFinanceiro</name>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
-            <word>Acessos</word>
-            <word>Cabeçalho</word>
-            <word>Cabeçálho</word>
-            <word>Cadastro</word>
-            <word>corpo</word>
-            <word>Correção</word>
-            <word>Criar</word>
-            <word>Código</word>
+            <word>Alisson</word>
+            <word>Cancelar</word>
+            <word>Controle</word>
             <word>Descrição</word>
-            <word>Dia</word>
-            <word>Mês</word>
-            <word>não</word>
-            <word>Observação</word>
-            <word>preenchidos</word>
-            <word>Professores</word>
-            <word>Relatório</word>
-            <word>Relatórios</word>
-            <word>Sistema</word>
-            <word>Viisializar</word>
+            <word>Devedores</word>
+            <word>Enrique</word>
+            <word>Financeiro</word>
+            <word>Gasto</word>
+            <word>Geral</word>
+            <word>Guilherme</word>
+            <word>Jáder</word>
+            <word>Pagar</word>
+            <word>Pendentes</word>
+            <word>Receber</word>
+            <word>Relação</word>
+            <word>Salvar</word>
+            <word>Solicitações</word>
+            <word>Título</word>
         </spellchecker-wordlist>
     </configuration>
 </project>
