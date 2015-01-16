@@ -15,7 +15,7 @@ include "./Model/config.php";
         
         <title>Controle Financeiro</title>
     </head>
-    <body style="padding: 0;margin: 0;" >
+    <body style="padding: 0;margin: 0;" onload="loadDiv('InicialDados.php','dados')">
         <div id="menu" style="width: 100%; height: 40px;background-color: blanchedalmond;">
             <table align="center" valign="middle" style="width: 100%;height: 100%;">
                 <tr>
@@ -25,8 +25,8 @@ include "./Model/config.php";
                                 <td ><button onclick="loadDiv('RegistrarTicketView.php','dados')">Registrar Ticket</button></td>
                                 <td ><button onclick="loadDiv('AReceberView.php','dados')">A Receber</button></td>
                                 <td ><button onclick="loadDiv('APagarView.php','dados')">A Pagar</button></td>
-                                <td ><button >Relação Geral</button></td>
-                                <td ><button >Solicitações Pendentes</button></td>
+                                <td ><button disabled="disabled" onclick="loadDiv('RelacaoGeralView.php','dados')">Relação Geral</button></td>
+                                <td ><button onclick="loadDiv('SolicitacoesPendentesView.php','dados')">Solicitações Pendentes</button></td>
                             </tr>
                         </table>
                     </td>
@@ -40,12 +40,7 @@ include "./Model/config.php";
                 </tr>
             </table>
         </div>
-        <div id="dados" align="center" > 
-            <table valign="middle"  style="width: 100%;height: 100%;">
-                <tr>
-                    <td align="center"><h1 style="color: gainsboro;font-size: 72px;">Controle Financeiro</h1></td>
-                </tr>
-            </table>
+        <div id="dados" align="center" >
         </div>
     </body>
 </html>
