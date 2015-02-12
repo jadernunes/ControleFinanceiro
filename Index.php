@@ -1,6 +1,21 @@
-<?php 
+<?php
 
 include "./Model/config.php";
+include "./Model/MySql_Class.php";
+$myClass = new MySql_Class();
+$onLoad = "";
+
+if(isset($_SESSION['user']))
+{
+    if($myClass->ValidaSession($_SESSION['user']['identificador']))
+        $onLoad = 'onload="loadDiv(\'Inicial.php\',\'div_Inicial\');"';
+    else
+        $onLoad = 'onload="loadDiv(\'Login.php\',\'div_Inicial\');loadDiv(\'pageVerify.php\',\'div_vefiry\');"';
+}
+else 
+{
+    $onLoad = 'onload="loadDiv(\'Login.php\',\'div_Inicial\');"';
+}
 
 ?>
 
@@ -12,35 +27,10 @@ include "./Model/config.php";
         <script src="ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
         <link href="defaultCSS.css" rel="stylesheet">
         <script src="./Model/functionGeral.js" ></script>
-        
         <title>Controle Financeiro</title>
     </head>
-    <body style="padding: 0;margin: 0;" onload="loadDiv('InicialDados.php','dados')">
-        <div id="menu" style="width: 100%; height: 40px;background-color: blanchedalmond;">
-            <table align="center" valign="middle" style="width: 100%;height: 100%;">
-                <tr>
-                    <td align="left">
-                        <table >
-                            <tr >
-                                <td ><button onclick="loadDiv('RegistrarTicketView.php','dados')">Registrar Ticket</button></td>
-                                <td ><button onclick="loadDiv('AReceberView.php','dados')">A Receber</button></td>
-                                <td ><button onclick="loadDiv('APagarView.php','dados')">A Pagar</button></td>
-                                <td ><button disabled="disabled" onclick="loadDiv('RelacaoGeralView.php','dados')">Relação Geral</button></td>
-                                <td ><button onclick="loadDiv('SolicitacoesPendentesView.php','dados')">Solicitações Pendentes</button></td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td align="right">
-                        <table>
-                            <tr >
-                                <td ><button >Login</button></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="dados" align="center" >
+    <body style="padding: 0;margin: 0;" <?php echo $onLoad;?>>
+        <div id="div_Inicial" >
         </div>
     </body>
 </html>

@@ -1,5 +1,8 @@
 <?php
 include "./Model/config.php";
+include "./Model/MySql_Class.php";
+
+$myClass = new MySql_Class();
 ?>
 <div align="center" style="border-style: groove;border-bottom: none;margin-top: 2%;">
     <div>

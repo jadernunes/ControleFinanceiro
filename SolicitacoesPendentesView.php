@@ -3,7 +3,7 @@ include "./Model/config.php";
 ?>
 <div align="center">
     <div>
-        <h1 class="titutlo">Solicitações Pendentes</h1>
+        <h1 class="titutlo">Solicitações de Pagamentos</h1>
     </div>
     <div id="conteudo_opc" >
         <div style="width: 100%;border-style: groove;border-bottom: none;" >

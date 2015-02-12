@@ -3,13 +3,8 @@ class classGeral {
     function connection(){
                 
         $servidorLocal = "localhost";
-        $usuarioLocal = "myschool";
-        $senhaLocal = "admin";
-
-//Descomentar para conexões com o Azure       
-//        $servidor = $servidorAzure;
-//        $usuario = $usuarioAzure;
-//        $senha = $senhaAzure;
+        $usuarioLocal = "cf";
+        $senhaLocal = "cfGreenb";
         
 //Descomentar para conexões locais
         $servidor = $servidorLocal;
@@ -17,7 +12,7 @@ class classGeral {
         $senha = $senhaLocal;
         
         
-        $con=mysqli_connect($servidor,$usuario,$senha,"myschool");
+        $con=mysqli_connect($servidor,$usuario,$senha,"ControleFinanceiro");
         // Check connection
         if (mysqli_connect_errno()) {
           echo "Failed to connect to MySQL: " . mysqli_connect_error();

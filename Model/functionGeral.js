@@ -33,3 +33,31 @@ function setVisible(campo,status){
         $('#'+campo+'').hide();
     }
 }
+
+function AddUsuarioNoGrupo(idGrupo,idUsuarioEnvia)
+{
+    
+    var m = prompt('Digite o email do Usuario');
+
+    if(m != null)
+    {
+        loadDiv('ColocaPost.php?action=addUsuarioNoGrupo&email='+m+'&idGrupo='+idGrupo+'&idUsuarioEnvia='+idUsuarioEnvia,'carregaCadastro');
+    }
+}
+
+function ConfirmaVinculo(idSolicitacao)
+{
+    loadDiv('ColocaPost.php?action=ConfirmaVinculo&idSolicitacao='+idSolicitacao,'carregaCadastro');
+}
+
+function CancelaSolicitacaoVinculo(idSolicitacao)
+{
+    loadDiv('ColocaPost.php?action=CancelaSolicitacaoVinculo&idSolicitacao='+idSolicitacao,'carregaCadastro');
+}
+
+function CancelaSolicitacaoVinculoRealizadas(idSolicitacao)
+{
+    loadDiv('ColocaPost.php?action=CancelaSolicitacaoVinculoRealizadas&idSolicitacao='+idSolicitacao,'carregaCadastro');
+}
+
+
