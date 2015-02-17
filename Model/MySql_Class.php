@@ -1,19 +1,65 @@
 <?php
-include "classGeral.php";
-
 class MySql_Class {
        
+	function connection(){
+                
+        $servidorLocal = "localhost";
+        $usuarioLocal = "cf";
+        $senhaLocal = "cfGreenb";
+        
+//Descomentar para conexões locais
+        $servidor = $servidorLocal;
+        $usuario = $usuarioLocal;
+        $senha = $senhaLocal;
+        
+        $con=mysqli_connect($servidor,$usuario,$senha,"ControleFinanceiro");
+        // Check connection
+        if (mysqli_connect_errno()) {
+          echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }else{
+            return $con;
+        }
+    }
+    
+    function select($query){
+        $con = $this->connection();
+        $result = mysqli_query($con,$query);
+        $arrayObjects = array();
+        
+        $i = 0;
+        while($arrayObject = mysqli_fetch_array($result)){
+            $objetc = array();
+            foreach($arrayObject as $colun => $r){
+                if(!is_numeric($colun)){
+                    $objetc[$colun] = $r;
+                }
+            }
+            $arrayObjects[$i] = $objetc;
+            $i++;
+        }
+        mysqli_close($con);
+        return $arrayObjects;
+    }
+	
+    function insert($query){
+        $con = $this->connection();
+        mysqli_query($con,$query);
+        $id = mysqli_insert_id($con);
+        mysqli_close($con);
+        return $id;
+    }
+	   
     function CadastroNovoUsuario($nome,$email,$identificador)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sqlUser = 'INSERT INTO Usuario (name,email,identificador,ativo) VALUES (\''.$nome.'\',\''.$email.'\',\''.$identificador.'\',1);';
-        $idUsuario = $classGeral->insert($sqlUser);
+        $idUsuario = $this->insert($sqlUser);
 //        $this->alert($sql);
         
         if(count($idUsuario) > 0)
         {
             $sqlGrupoGeral = 'INSERT INTO UsuarioGrupo (idUsuario,idGrupo,ativo) VALUES ('.$idUsuario.',1, 1);';
-            $idUsuarioGrupo = $classGeral->insert($sqlGrupoGeral);
+            $idUsuarioGrupo = $this->insert($sqlGrupoGeral);
             
             if($idUsuarioGrupo)
             {
@@ -21,7 +67,7 @@ class MySql_Class {
                 if($idSolicitacao)
                 {
                     $sql = 'SELECT * FROM Usuario WHERE idUsuario = '.$idUsuario;
-                    $user = $classGeral->select($sql);
+                    $user = $this->select($sql);
                     if($user)
                     {
                         return $user;
@@ -34,12 +80,24 @@ class MySql_Class {
         }
         return FALSE;
     }
+    
+    function AlteraDadosUsuario($nome,$email,$identificador,$idUsuario)
+    {
+        $sqlUser = 'UPDATE Usuario SET name = \''.$nome.'\', email = \''.$email.'\', identificador = \''.$identificador.'\' WHERE idUsuario = '.$idUsuario;
+        $idUsuario = $this->insert($sqlUser);
+        
+        if(count($idUsuario) > 0)
+        {
+            return $user;
+        }
+        return FALSE;
+    }
             
     function GetGrupoById($idGrupo)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();
         $sql = 'SELECT * FROM Grupo WHERE idGrupo = '.$idGrupo;
-        $grupo = $classGeral->select($sql);
+        $grupo = $this->select($sql);
 //        $this->alert($sql);
         
         if(count($grupo) > 0)
@@ -52,9 +110,9 @@ class MySql_Class {
     
     function GetUsuarioById($idUsuario)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sql = 'SELECT * FROM Usuario WHERE idUsuario = '.$idUsuario;
-        $user = $classGeral->select($sql);
+        $user = $this->select($sql);
 //        $this->alert($sql);
         
         if(count($user) > 0)
@@ -67,9 +125,9 @@ class MySql_Class {
     
     function GetSolicitacoesDeUmSolicitado($idUsuario)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sql = 'SELECT s.*,e.descricao\'estado\',s.idEstadoSolicitacao FROM Solicitacao s INNER JOIN EstadoSolicitacao e on e.idEstadoSolicitacao = s.idEstadoSolicitacao WHERE s.idUsuarioRecebe = '.$idUsuario.' ORDER BY s.idEstadoSolicitacao DESC';
-        $solicitacao = $classGeral->select($sql);
+        $solicitacao = $this->select($sql);
 //        $this->alert($sql);
         
         if(count($solicitacao) > 0)
@@ -82,9 +140,9 @@ class MySql_Class {
     
     function GetSolicitacoesDeUmSolicitante($idUsuario)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sql = 'SELECT s.*,e.descricao\'estado\',s.idEstadoSolicitacao FROM Solicitacao s INNER JOIN EstadoSolicitacao e on e.idEstadoSolicitacao = s.idEstadoSolicitacao WHERE s.idUsuarioEnvia = '.$idUsuario.' ORDER BY s.idEstadoSolicitacao = 2 DESC';
-        $solicitacao = $classGeral->select($sql);
+        $solicitacao = $this->select($sql);
 //        $this->alert($sql);
         
         if(count($solicitacao) > 0)
@@ -97,9 +155,9 @@ class MySql_Class {
     
     function AtualizaSolicitacoesParaNovoUsuario($email,$idUsuario)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sql = 'UPDATE Solicitacao SET idUsuarioRecebe = '. $idUsuario .' where email like \''.$email.'\'';
-        $idSolicitacao = $classGeral->insert($sql);
+        $idSolicitacao = $this->insert($sql);
 //        $this->alert($sql);
 //        break;
         if(count($idSolicitacao) > 0)
@@ -111,12 +169,12 @@ class MySql_Class {
     
     function CriarGrupo($titulo,$idusuarioCriador)
     {
-        $classGeral = new classGeral();
-        $idGrupo = $classGeral->insert('INSERT INTO Grupo(titulo,idUsuarioCriador,ativo) VALUES (\''. $titulo .'\','. $idusuarioCriador .',1)');
+        //$classGeral = new classGeral();;
+        $idGrupo = $this->insert('INSERT INTO Grupo(titulo,idUsuarioCriador,ativo) VALUES (\''. $titulo .'\','. $idusuarioCriador .',1)');
         
         if($idGrupo)
         {
-            $idGrupo = $classGeral->insert('INSERT INTO UsuarioGrupo(idUsuario,idGrupo,ativo) VALUES ('. $idusuarioCriador .', '. $idGrupo .', 1)') ? $idGrupo : NULL;
+            $idGrupo = $this->insert('INSERT INTO UsuarioGrupo(idUsuario,idGrupo,ativo) VALUES ('. $idusuarioCriador .', '. $idGrupo .', 1)') ? $idGrupo : NULL;
         }
         
         return $idGrupo;
@@ -124,9 +182,9 @@ class MySql_Class {
     
     function usuarioEstaNoGrupo($email,$grupo)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sql = 'SELECT u.* FROM Usuario u INNER JOIN UsuarioGrupo ug on u.idUsuario = ug.idUsuario WHERE ug.idGrupo = '.$grupo.' AND u.email like \''.$email.'\' AND ug.ativo = 1';
-        $user = $classGeral->select($sql);
+        $user = $this->select($sql);
 //        $this->alert($sql);
         
         if(count($user) > 0)
@@ -139,9 +197,9 @@ class MySql_Class {
     
     function temSolicitacaoVinculoParaGrupo($email,$grupo)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sql = 'SELECT s.* FROM Usuario u INNER JOIN Solicitacao s WHERE u.idUsuario = s.idUsuarioRecebe AND s.idGrupo = '.$grupo.' AND s.idTipoSolicitacao = 1 AND (s.email like \''.$email.'\' AND s.idEstadoSolicitacao = 2)';
-        $solicitacao = $classGeral->select($sql);
+        $solicitacao = $this->select($sql);
 //        $this->alert($sql);
         
         if(count($solicitacao) > 0)
@@ -153,8 +211,8 @@ class MySql_Class {
     }
     function CancelaSolicitacaoVinculo($idSolicitacao)
     {
-        $classGeral = new classGeral();
-        $idSolicitacao = $classGeral->insert('UPDATE Solicitacao SET idEstadoSolicitacao = 3 where idSolicitacao = '.$idSolicitacao);
+        //$classGeral = new classGeral();;
+        $idSolicitacao = $this->insert('UPDATE Solicitacao SET idEstadoSolicitacao = 3 where idSolicitacao = '.$idSolicitacao);
         
         if($idSolicitacao)
         {
@@ -166,8 +224,8 @@ class MySql_Class {
     
     function CancelaSolicitacaoVinculoRealizadas($idSolicitacao)
     {
-        $classGeral = new classGeral();
-        $idSolicitacao = $classGeral->insert('DELETE FROM Solicitacao where idSolicitacao = '.$idSolicitacao);
+        //$classGeral = new classGeral();;
+        $idSolicitacao = $this->insert('DELETE FROM Solicitacao where idSolicitacao = '.$idSolicitacao);
         
         if($idSolicitacao)
         {
@@ -179,18 +237,18 @@ class MySql_Class {
     
     function ConfirmaVinculo($idSolicitacao)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         $sql = 'SELECT * FROM Solicitacao WHERE idSolicitacao = '.$idSolicitacao;
-        $solicitacao = $classGeral->select($sql);
+        $solicitacao = $this->select($sql);
 //        $this->alert($sql);
         
         if(count($solicitacao) > 0)
         {
-            $usuarioGrupo = $classGeral->insert('INSERT INTO UsuarioGrupo (idUsuario,idGrupo,ativo) VALUES ('.$solicitacao[0]['idUsuarioRecebe'].','.$solicitacao[0]['idGrupo'].', 1)');
+            $usuarioGrupo = $this->insert('INSERT INTO UsuarioGrupo (idUsuario,idGrupo,ativo) VALUES ('.$solicitacao[0]['idUsuarioRecebe'].','.$solicitacao[0]['idGrupo'].', 1)');
             
             if(count($usuarioGrupo) > 0)
             {
-                $idSolicitacao = $classGeral->insert('UPDATE Solicitacao SET idEstadoSolicitacao = 1 where idSolicitacao = '.$idSolicitacao);
+                $idSolicitacao = $this->insert('UPDATE Solicitacao SET idEstadoSolicitacao = 1 where idSolicitacao = '.$idSolicitacao);
         
                 if($idSolicitacao)
                 {
@@ -214,7 +272,7 @@ class MySql_Class {
             
     function AddUsuarioNoGrupo($email,$idGrupo,$idUsuarioEnvia)
     {
-        $classGeral = new classGeral();
+        //$classGeral = new classGeral();;
         
         /*
          * 1º - Criar uma solicitação
@@ -234,7 +292,7 @@ class MySql_Class {
                     {
                         $idUsuarioRecebe = $user[0]['idUsuario'];
                         $sql = 'INSERT INTO Solicitacao (idUsuarioEnvia,idUsuarioRecebe,idGrupo,idEstadoSolicitacao,idTipoSolicitacao,email) VALUES ('.$idUsuarioEnvia.','.$idUsuarioRecebe.', '.$idGrupo.', 2, 1,\''.$email.'\')';
-                        $idSolicitacao = $classGeral->insert($sql);
+                        $idSolicitacao = $this->insert($sql);
                         if($idSolicitacao)
                         {
                             $this->alert('Solicitação criada com sucesso!');
@@ -261,7 +319,7 @@ class MySql_Class {
             else
             {
                 $sql = 'INSERT INTO Solicitacao (email,idUsuarioEnvia,idGrupo,idEstadoSolicitacao,idTipoSolicitacao) VALUES (\''.$email.'\', '.$idUsuarioEnvia.', '.$idGrupo.', 2, 1)';
-                $idSolicitacao = $classGeral->insert($sql);
+                $idSolicitacao = $this->insert($sql);
                 if($idSolicitacao)
                 {
                     $this->alert('Solicitação criada com sucesso. Aguardando cadastro com este email');
@@ -283,8 +341,8 @@ class MySql_Class {
     
     function getUsuarioByEmail($email)
     {
-        $classGeral = new classGeral();
-        $user = $classGeral->select('SELECT * FROM Usuario WHERE email like \''.$email.'\'');
+        //$classGeral = new classGeral();;
+        $user = $this->select('SELECT * FROM Usuario WHERE email like \''.$email.'\'');
         
         if($user)
         {
@@ -296,15 +354,15 @@ class MySql_Class {
             
     function getTodosUsuarios()
     {
-        $classGeral = new classGeral();
-        $jsonResult = $classGeral->select('Select * From Usuario');
+        //$classGeral = new classGeral();;
+        $jsonResult = $this->select('Select * From Usuario');
         return $jsonResult;
     }
     
     function getUsuarioPorIdentificador($identificador)
     {
-        $classGeral = new classGeral();
-        $jsonResult = $classGeral->select('SELECT * FROM Usuario WHERE identificador LIKE \''.$identificador.'\'');
+        //$classGeral = new classGeral();;
+        $jsonResult = $this->select('SELECT * FROM Usuario WHERE identificador LIKE \''.$identificador.'\'');
         if($jsonResult)
         {
             return $jsonResult;
@@ -317,22 +375,21 @@ class MySql_Class {
     
     function getGrupos()
     {
-        $classGeral = new classGeral();
-        $jsonResult = $classGeral->select('SELECT * FROM Grupo where idGrupo != 1');
-        if($jsonResult)
-        {
-            return $jsonResult;
-        }
-        else 
-        {
-            return FALSE;
-        }
+         $jsonResult = $this->select('SELECT * FROM Grupo where idGrupo != 1');
+         if($jsonResult)
+         {
+             return $jsonResult;
+         }
+         else 
+         {
+             return FALSE;
+         }
     }
     
     function getGruposDoUsuario($idUsuario)
     {
-        $classGeral = new classGeral();
-        $jsonResult = $classGeral->select('SELECT g.* FROM Grupo g INNER JOIN UsuarioGrupo ug ON g.idGrupo = ug.idGrupo WHERE g.idGrupo != 1 AND ug.idUsuario = '.$idUsuario);
+        //$classGeral = new classGeral();;
+        $jsonResult = $this->select('SELECT g.* FROM Grupo g INNER JOIN UsuarioGrupo ug ON g.idGrupo = ug.idGrupo WHERE g.idGrupo != 1 AND ug.idUsuario = '.$idUsuario);
         if($jsonResult)
         {
             return $jsonResult;
@@ -345,8 +402,8 @@ class MySql_Class {
     
     function getUsuariosPorGrupo($idGrupo)
     {
-        $classGeral = new classGeral();
-        $jsonResult = $classGeral->select('SELECT u.* FROM Usuario u INNER JOIN UsuarioGrupo ug ON u.idUsuario = ug.idUsuario WHERE ug.idGrupo = '.$idGrupo.' AND u.ativo = 1 AND ug.ativo = 1');
+        //$classGeral = new classGeral();;
+        $jsonResult = $this->select('SELECT u.* FROM Usuario u INNER JOIN UsuarioGrupo ug ON u.idUsuario = ug.idUsuario WHERE ug.idGrupo = '.$idGrupo.' AND u.ativo = 1 AND ug.ativo = 1');
         if($jsonResult)
         {
             return $jsonResult;

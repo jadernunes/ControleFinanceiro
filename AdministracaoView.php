@@ -91,17 +91,17 @@ $listGrupos = $myClass->getGruposDoUsuario($_SESSION['user']['idUser']);
                                         <td align="center" style="border-style: groove;"><?php echo $solicitante[0]['name']?></td>
                                         <td align="center" style="border-style: groove;"><?php echo $grupo[0]['titulo']?></td>
                                         <td align="center" style="border-style: groove;"><?php echo $r['estado']?></td>
-                                        <td align="center" style="border-style: groove;">
                                             <?php 
                                             if($r['idEstadoSolicitacao'] == 2)
                                             {
                                                 ?>
+                                                <td align="center" style="border-style: groove;">
                                                 <button onclick="CancelaSolicitacaoVinculo(this.id);" id="<?php echo $r['idSolicitacao']?>" style="background-color: red;">Recusar</button>
                                                 <button id="<?php echo $r['idSolicitacao']?>" onclick="ConfirmaVinculo(this.id);" style="background-color: green;">Aceitar</button>
+                                                </td>
                                                 <?php
                                             }
                                             ?>
-                                        </td>
                                     </tr>
                                 <?php
                                 }

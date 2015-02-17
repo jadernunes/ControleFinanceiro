@@ -1,5 +1,5 @@
 <?php
-class classGeral {
+class ClassGeral {
     function connection(){
                 
         $servidorLocal = "localhost";

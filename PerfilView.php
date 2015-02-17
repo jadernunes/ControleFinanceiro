@@ -1,27 +1,15 @@
 <?php
 include "./Model/config.php";
 include "./Model/MySql_Class.php";
-
 $myClass = new MySql_Class();
-$gupos = $myClass->getGrupos();
 ?>
-<html >
-    <head >
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <script src="ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.min.js"></script>
-        <link href="defaultCSS.css" rel="stylesheet">
-        <script src="./Model/functionGeral.js" ></script>
-        <title>Controle Financeiro</title>
-    </head>
-    <body style="padding: 0;margin: 0; padding: 10px;" >
-        <div align="center">
-            <div>
-                <h1 class="titutlo">Cadastro</h1>
-            </div>
-            <div id="conteudo_opc" >
-                <div style="width: 100%;height: 100%; border-style: groove;border-bottom: none;border-left: none;border-right: none;overflow-y: scroll;">
+<div align="center">
+    <div>
+        <h1 class="titutlo">Perfil</h1>
+    </div>
+    <div id="conteudo_opc">
+        <div style="width: 100%;border-style: groove;border-bottom: none;" >
+            <div style="width: 100%;height: 100%; border-style: groove;border-bottom: none;border-left: none;border-right: none;overflow-y: scroll;">
                     <table style="width: 30%;">
                         <tr>
                             <td>
@@ -37,7 +25,7 @@ $gupos = $myClass->getGrupos();
                                                     </tr>
                                                     <tr>
                                                         <td align='center' style="width: 70%;">
-                                                            <input id="nome" name="nome"/>
+                                                            <input id="nome" name="nome" value="<?php echo $_SESSION['user']['nome']?>"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -47,7 +35,7 @@ $gupos = $myClass->getGrupos();
                                                     </tr>
                                                     <tr>
                                                         <td align='center' style="width: 70%;">
-                                                            <input id="email" name="email"/>
+                                                            <input id="email" name="email" value="<?php echo $_SESSION['user']['email']?>"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -78,7 +66,7 @@ $gupos = $myClass->getGrupos();
                                             <td align='center' style="width: 70%;">
                                                 <table style="width: 100%;">
                                                     <tr>
-                                                        <td align='center'><button type="reset" id="btCancel" name="cancel" style="background-color: red;" onclick="loadPagina('Index.php')">Cancelar</button>&nbsp;<button style="background-color: green;" id="btCadastro" name="cadastro">Salvar</button></td>
+                                                        <td align='center'><button name="page" value="Inicial-dados" style="background-color: red;">Cancelar</button>&nbsp;<button style="background-color: green;" name="savarPerfil" >Salvar</button></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -89,7 +77,6 @@ $gupos = $myClass->getGrupos();
                         </tr>
                     </table>
                 </div>
-            </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>

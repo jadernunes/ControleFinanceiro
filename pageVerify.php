@@ -20,7 +20,9 @@ if(isset($_SESSION['user']))
             <?php
         }
         else
+		{
             $myClass->loadDiv($_SESSION['user']['loadPage']['page'],$_SESSION['user']['loadPage']['div']);
+		}
     }
     else
     {
