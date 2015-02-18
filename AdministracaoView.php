@@ -25,7 +25,7 @@ $listGrupos = $myClass->getGruposDoUsuario($_SESSION['user']['idUser']);
                         <td align="center" valign="top">
                             <table style="width: 100%;border-style: groove;" >
                                 <tr>
-                                    <td align="left"><?php echo $r['titulo']?></td>
+                                    <td align="left"><b><?php echo $r['titulo']?></b></td>
                                     <td align="center"><button onclick="AddUsuarioNoGrupo(this.id.split('/')[0],this.id.split('/')[1]);" id="<?php echo $r['idGrupo'].'/'.$_SESSION['user']['idUser']?>">+</button></td>
                                 </tr>
                             </table>
@@ -36,7 +36,7 @@ $listGrupos = $myClass->getGruposDoUsuario($_SESSION['user']['idUser']);
                                 ?>
                                 <tr>
                                     <td align="left">
-                                        <input type="radio" />
+                                        <input type="radio" name="nameUsuario"/>
                                     </td>
                                     <td align="left">
                                         <?php echo $rUser['name']?>
@@ -63,6 +63,9 @@ $listGrupos = $myClass->getGruposDoUsuario($_SESSION['user']['idUser']);
                             </div>
                         </td>
                     </tr>
+                </table>
+                
+                <table style="width: 70%;" >
                     <tr>
                         <td align="center">
                             <?php
@@ -131,11 +134,19 @@ $listGrupos = $myClass->getGruposDoUsuario($_SESSION['user']['idUser']);
 
                                 foreach ($solicitacoesRealizadas as $colSa => $ra)
                                 {
-                                    $solicitado = $myClass->GetUsuarioById($ra['idUsuarioRecebe']);
+                                    $solicitado = null;
+                                    if(isset($ra['idUsuarioRecebe']))
+                                    {
+                                        $solicitado = $myClass->GetUsuarioById($ra['idUsuarioRecebe']);
+                                    }
+                                    else
+                                    {
+                                        $solicitado[0]['name'] = $ra['email'];
+                                    }
                                     $grupo = $myClass->GetGrupoById($ra['idGrupo']);
                                 ?>
                                     <tr>
-                                        <td align="center" style="border-style: groove;"><?php echo $solicitado[0]['name']?></td>
+                                        <td align="center" style="border-style: groove;"><?php echo $solicitado[0]['name'];?></td>
                                         <td align="center" style="border-style: groove;"><?php echo $grupo[0]['titulo']?></td>
                                         <td align="center" style="border-style: groove;"><?php echo $ra['estado']?></td>
                                         <?php 

@@ -7,7 +7,6 @@ $myClass = new MySql_Class();
 
 ?>
 <div id="div_vefiry"></div>
-
 <div id="menu" style="width: 100%; height: 40px;background-color: blanchedalmond;" >
     <table align="center" valign="middle" style="width: 100%;height: 100%;">
         <tr>
@@ -17,11 +16,11 @@ $myClass = new MySql_Class();
                         <tr >
                             <td ><button name="page" value="PerfilView-dados" >Perfil</button></td>
                             <td ><button name="page" value="AdministracaoView-dados" >Administração</button></td>
-                            <td ><button name="page" value="RegistrarTicketView-dados" >Registrar Ticket</button></td>
+<!--                            <td ><button name="page" value="RegistrarTicketView-dados" >Registrar Ticket</button></td>
                             <td ><button name="page" value="AReceberView-dados" >A Receber</button></td>
                             <td ><button name="page" value="APagarView-dados">A Pagar</button></td>
                             <td ><button name="page" value="RelacaoGeralView-dados">Relação Geral</button></td>
-                            <td ><button name="page" value="SolicitacoesPendentesView-dados">Solicitações de Pagamentos</button></td>
+                            <td ><button name="page" value="SolicitacoesPendentesView-dados">Solicitações de Pagamentos</button></td>-->
                         </tr>
                     </table>
                 </form>

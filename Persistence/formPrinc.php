@@ -76,8 +76,6 @@ else if(isset($_POST['cadastro']))
 }
 else if(isset($_POST['savarPerfil']))
 {
-    
-    
     if(isset($_POST['nome']))//nome
     {
         if($myClass->verifyPostGetSession($_POST['nome']))//nome
@@ -99,9 +97,7 @@ else if(isset($_POST['savarPerfil']))
                                         $nome = $_POST['nome'];
                                         $email = $_POST['email'];
                                         $password = $_POST['password'];
-
                                         $identificador = sha1($email.'asdf'.$password);
-                                        
                                         $user = $myClass->AlteraDadosUsuario($nome,$email,$identificador,$_SESSION['user']['idUser']);
                                         
                                         if($user)
@@ -117,34 +113,59 @@ else if(isset($_POST['savarPerfil']))
 
                                             $_SESSION['\''.$identificador.'\''] = time();
                                         }
-                                        
                                         $myClass->alert('Perfil Atualizado com Sucesso!');
-    
-                                        if(isset($_SESSION['user']))
-                                        {
-                                             $_SESSION['user']['loadPage']['page'] = 'PerfilView.php';
-                                             $_SESSION['user']['loadPage']['div'] = 'dados';
-                                        }
-
-                                        $myClass->loadPagina('../Index.php');
                                     }
-                                    else {$myClass->alert('Passwords different!');}
+                                    else 
+                                    {
+                                        $myClass->alert('Passwords diferentes!');
+                                    }
                                 }
-                                else {$myClass->alert('Confirm Password inválido 1!');}
+                                else 
+                                {
+                                    $myClass->alert('Confirmação do Password inválida');
+                                }
                             }
-                            else {$myClass->alert('Confirm Password inválido 2!');}
+                            else 
+                            {
+                                $myClass->alert('Você deve informar a confirmação do password!');
+                            }
                         }
-                        else {$myClass->alert('Password inválido 1!');}
+                        else 
+                        {
+                            //$myClass->alert('Password inválido');
+                        }
                     }
-                    else {$myClass->alert('Password inválido 2!');}
+                    else 
+                    {
+                        //$myClass->alert('Você deve informar o Password!');
+                    
+                    }
                 }
-                else {$myClass->alert('Email inválido 1!');}
+                else 
+                {
+                    $myClass->alert('Email inválido');
+                }   
             }
-            else {$myClass->alert('Email inválido 2!');}
+            else 
+            {
+                $myClass->alert('Você deve informar o Email!');
+            }
         }
-        else {$myClass->alert('Nome inválido 1!');}
+        else 
+        {
+            $myClass->alert('Nome inválido');
+        }
     }
-    else {$myClass->alert('Nome inválido 2!');}
+    else 
+    {$myClass->alert('Você deve informar o nome!');}
+    
+    if(isset($_SESSION['user']))
+    {
+         $_SESSION['user']['loadPage']['page'] = 'PerfilView.php';
+         $_SESSION['user']['loadPage']['div'] = 'dados';
+    }
+
+    $myClass->loadPagina('../Index.php');
 }
 else if(isset($_POST['page']))
 {

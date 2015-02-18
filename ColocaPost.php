@@ -9,8 +9,11 @@ if(isset($_GET['action']))
     if($_GET['action'] == 'addUsuarioNoGrupo')
     {
         if(isset($_GET['email']) && isset($_GET['idGrupo']) && isset($_GET['idUsuarioEnvia']))
-            $myClass->AddUsuarioNoGrupo($_GET['email'], $_GET['idGrupo'],$_GET['idUsuarioEnvia']);
-            $myClass->loadPagina('Index.php');
+        {
+            if($myClass->verifyPostGetSession($_GET['email']) && $myClass->verifyPostGetSession($_GET['idGrupo']) && $myClass->verifyPostGetSession($_GET['idUsuarioEnvia']))
+                $myClass->AddUsuarioNoGrupo($_GET['email'], $_GET['idGrupo'],$_GET['idUsuarioEnvia']);
+        }
+        $myClass->loadPagina('Index.php');
     }
     else if($_GET['action'] == 'ConfirmaVinculo')
     {
