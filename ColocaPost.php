@@ -39,5 +39,32 @@ if(isset($_GET['action']))
             $myClass->loadPagina('Index.php');
         }
     }
+    else if($_GET['action'] == 'pagarTicket')
+    {
+//        $myClass->show($_GET);
+        if(isset($_GET['idTicket']) && isset($_GET['valorPago']) && isset($_GET['idUsuario']))
+        {
+            $idUsuario = $_GET['idUsuario'];
+            $idTicket = $_GET['idTicket'];
+            $valor = $_GET['valorPago'];
+            
+            if($myClass->PagarTicket($idUsuario, $idTicket, $valor))
+            {
+                $myClass->alert('Valor registrado com sucesso!');
+            }
+            else
+            {
+                $myClass->alert('Você não pode fazer um pagamento maior o devido.');
+            }
+        }
+        
+        if(isset($_SESSION['user']))
+        {
+            $_SESSION['user']['loadPage']['page'] = 'APagarView.php';
+            $_SESSION['user']['loadPage']['div'] = 'dados';
+        }
+
+    $myClass->loadPagina('../Index.php');
+    }
 }
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 include "./Model/config.php";
 include "./Model/MySql_Class.php";
 
@@ -16,10 +15,10 @@ $myClass = new MySql_Class();
                         <tr >
                             <td ><button name="page" value="PerfilView-dados" >Perfil</button></td>
                             <td ><button name="page" value="AdministracaoView-dados" >Administração</button></td>
-<!--                            <td ><button name="page" value="RegistrarTicketView-dados" >Registrar Ticket</button></td>
+                            <td ><button name="page" value="RegistrarTicketView-dados" >Registrar Ticket</button></td>
                             <td ><button name="page" value="AReceberView-dados" >A Receber</button></td>
                             <td ><button name="page" value="APagarView-dados">A Pagar</button></td>
-                            <td ><button name="page" value="RelacaoGeralView-dados">Relação Geral</button></td>
+<!--                            <td ><button name="page" value="RelacaoGeralView-dados">Relação Geral</button></td>
                             <td ><button name="page" value="SolicitacoesPendentesView-dados">Solicitações de Pagamentos</button></td>-->
                         </tr>
                     </table>

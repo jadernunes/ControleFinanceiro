@@ -389,7 +389,7 @@ class MySql_Class {
     function getGruposDoUsuario($idUsuario)
     {
         //$classGeral = new classGeral();;
-        $jsonResult = $this->select('SELECT g.* FROM Grupo g INNER JOIN UsuarioGrupo ug ON g.idGrupo = ug.idGrupo WHERE g.idGrupo != 1 AND ug.idUsuario = '.$idUsuario);
+        $jsonResult = $this->select('SELECT g.* FROM Grupo g INNER JOIN UsuarioGrupo ug ON g.idGrupo = ug.idGrupo WHERE g.idGrupo != 1 AND ug.idUsuario = '.$idUsuario.' ORDER BY titulo ASC');
         if($jsonResult)
         {
             return $jsonResult;
@@ -403,7 +403,7 @@ class MySql_Class {
     function getUsuariosPorGrupo($idGrupo)
     {
         //$classGeral = new classGeral();;
-        $jsonResult = $this->select('SELECT u.* FROM Usuario u INNER JOIN UsuarioGrupo ug ON u.idUsuario = ug.idUsuario WHERE ug.idGrupo = '.$idGrupo.' AND u.ativo = 1 AND ug.ativo = 1');
+        $jsonResult = $this->select('SELECT u.* FROM Usuario u INNER JOIN UsuarioGrupo ug ON u.idUsuario = ug.idUsuario WHERE ug.idGrupo = '.$idGrupo.' AND u.ativo = 1 AND ug.ativo = 1  ORDER BY u.name ASC');
         if($jsonResult)
         {
             return $jsonResult;
@@ -551,6 +551,196 @@ class MySql_Class {
         {
             return false;
         }
+    }
+    
+    function addTicket($ticket)
+    {
+        
+        $valorTicket = $this->moedaSendDB($ticket['valorTicket']);
+        $valorPago = $this->moedaSendDB($ticket['valorPago']);
+        
+        $sql = 'INSERT INTO Ticket (titulo, descricao, idGrupo, idUsuarioAutor, valorTicket, valorPago, status, ativo) VALUES (\''.$ticket['titulo'].'\',\''.$ticket['descricao'].'\','.$ticket['idGrupo'].', '.$ticket['idUsuarioAutor'].', '.$valorTicket.', '.$valorPago.', '.$ticket['status'].', '.$ticket['ativo'].');';
+        $idTicket = $this->insert($sql);
+        
+        if($idTicket)
+        {
+            $valorDevido =  floatval($ticket['valorTicket'])/count($ticket['usuarios']);
+            $valorDevido = $this->moedaSendDB($valorDevido);
+            $sucess = true;
+            for($i = 0;$i < count($ticket['usuarios']);$i++)
+            {
+                $sql = 'INSERT INTO UsuarioTicket(idUsuario,idTicket,ativo,valorDevido) VALUES ('.$ticket['usuarios'][$i].','.$idTicket.',1,'.$valorDevido.');';
+                $idUsuarioTicket = $this->insert($sql);
+                if($idUsuarioTicket <= 0)
+                {
+                    $sucess = false;
+                }
+                else
+                {
+                    if($ticket['idUsuarioAutor'] == $ticket['usuarios'][$i])
+                    {
+                        $sql = 'INSERT INTO Registro (idUsuario,idTicket,valorPago,statusRegistro,ativo) VALUES ('.$ticket['usuarios'][$i].','.$idTicket.',Round('.$valorDevido.',2),1,1)';
+                        $idUsuarioTicket = $this->insert($sql);
+                    }
+                    $sucess = true;
+                }
+            }
+            
+            if(!$sucess)
+            {
+                for($i = 0;$i < count($ticket['usuarios']);$i++)
+                {
+                    $idDeleteUsuarioTicket = $this->insert('Detele From UsuarioTicket where idTicket = '.$idTicket.' and idUsuario = '.$ticket['usuarios'][$i]);
+                }
+                
+                $this->insert('Detele From Ticket where idTicket = '.$idTicket);
+            }
+        }
+        return $sucess;
+    }
+    
+    function getTicket($idTicket)
+    {
+        $jsonResult = $this->select('SELECT * From Ticket WHERE idTicket = '.$idTicket);
+        if($jsonResult)
+        {
+            return $jsonResult;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+    
+    function getTicketFromGrupoAndUser($idGrupo,$idUser)
+    {
+        $sql = 'SELECT * From Ticket WHERE idGrupo = '.$idGrupo.' AND idUsuarioAutor = '.$idUser;
+        $jsonResult = $this->select($sql);
+        
+        if($jsonResult)
+        {
+            return $jsonResult;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+    
+    
+    function getTicketFromUsuarioDevedorByBrupo($idUser,$idGrupo)
+    {
+        $sql = 'SELECT * From Ticket t INNER JOIN UsuarioTicket ut on t.idTicket = ut.idTicket WHERE t.idGrupo = '.$idGrupo.' AND ut.idUsuario = '.$idUser;
+        
+        $jsonResult = $this->select($sql);
+        
+        if($jsonResult)
+        {
+            return $jsonResult;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+    
+    function getUsuariosByTicket($idTicket)
+    {
+        $sql = 'SELECT u.*,ut.* From Usuario u INNER JOIN UsuarioTicket ut on u.idUsuario = ut.idUsuario WHERE ut.idTicket = '.$idTicket;
+        $jsonResult = $this->select($sql);
+        
+        if($jsonResult)
+        {
+            return $jsonResult;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+    
+    function getTotalPagoPorTicket($idTicket)
+    {
+        $sql = 'SELECT SUM(valorPago) valorPago From Registro WHERE idTicket = '.$idTicket;
+        $jsonResult = $this->select($sql);
+        
+        if($jsonResult)
+        {
+            return $jsonResult;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+            
+    function getValorPagoUsuarioTicket($idUsuario,$idTicket)
+    {
+        $sql = 'SELECT Round(SUM(valorPago),2) valorPago From Registro WHERE idUsuario = '.$idUsuario.' AND idTicket = '.$idTicket;
+        $jsonResult = $this->select($sql);
+        
+        if($jsonResult)
+        {
+            return $jsonResult;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+    
+    function getSaldoByTicketAndUsuario($idUsuario,$idTicket)
+    {
+        $sql = 'SELECT count(ut.idUsuario) quantidadeDevedores,t.valorTicket From Ticket t INNER JOIN UsuarioTicket ut ON t.idTicket = ut.idTicket WHERE ut.idTicket = '.$idTicket;
+        $jsonResult = $this->select($sql);
+        
+        if($jsonResult)
+        {
+            $quantidadeDevedores = $jsonResult[0]['quantidadeDevedores'];
+            $valorTicket = $jsonResult[0]['valorTicket'];
+            
+            $saldo = $valorTicket/$quantidadeDevedores;
+            return $saldo;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+            
+    function PagarTicket($idUsuario,$idTicket,$valor)
+    {
+        $TotalPago = $this->getValorPagoUsuarioTicket($idUsuario,$idTicket);
+        $valorDividido = $this->getSaldoByTicketAndUsuario($idUsuario, $idTicket);
+        
+        $novoValor = ($valorDividido - $TotalPago[0]['valorPago']);
+        if($valor <= $novoValor)
+        {
+            $sql = 'INSERT INTO Registro (idUsuario,idTicket,valorPago,statusRegistro,ativo) VALUES ('.$idUsuario.','.$idTicket.','.$valor.',1,1)';
+            $idRegistro = $this->insert($sql);
+            if($idRegistro)
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    function moedaGetDB($valor)
+    {
+        return money_format('%.2i',$valor);
+    }
+    
+    function moedaSendDB($valor)
+    {
+        return money_format('%.2i',$valor);
     }
 }
 

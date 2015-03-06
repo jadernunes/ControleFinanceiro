@@ -167,6 +167,115 @@ else if(isset($_POST['savarPerfil']))
 
     $myClass->loadPagina('../Index.php');
 }
+else if(isset ($_POST['registrarTicket']))
+{
+   
+    
+    $ticket = array();
+    $listIdUser = array();
+    
+    if(isset($_POST['titulo']))
+    {
+        if($myClass->verifyPostGetSession($_POST['titulo']))
+        {
+            $titulo = $_POST['titulo'];
+            if(isset($_POST['descricao']))
+            {
+                if($myClass->verifyPostGetSession($_POST['descricao']))
+                {
+                    $descricao = $_POST['descricao'];
+                    if(isset($_POST['idGrupo']))
+                    {
+                        if($myClass->verifyPostGetSession($_POST['idGrupo']))
+                        {
+                            $idGrupo = $_POST['idGrupo'];
+                            $i = 0;
+                            foreach ($_POST as $dat => $r){
+                                $col = substr($dat, 0, 9);
+                                if($col == 'idUsuario'){
+                                    $listIdUser[$i] =  $r;
+                                    $i++;
+                                }
+                            }
+                            if(count($listIdUser) > 0)
+                            {
+                                if(isset($_POST['valorTicket']))
+                                {
+                                    
+                                    if($myClass->verifyPostGetSession($_POST['valorTicket']))
+                                    {
+                                        $valorTicket = $_POST['valorTicket'];
+                                        
+                                        $ticket['titulo'] = $titulo;
+                                        $ticket['descricao'] = $descricao;
+                                        $ticket['idGrupo'] = $idGrupo;
+                                        $ticket['idUsuarioAutor'] = $_SESSION['user']['idUser'];
+                                        $ticket['valorTicket'] = $valorTicket;
+                                        $ticket['valorPago'] = '0,00';
+                                        $ticket['status'] = 1;
+                                        $ticket['ativo'] = 1;
+                                        $ticket['usuarios'] = $listIdUser;
+                                        
+                                        if($myClass->addTicket($ticket))
+                                        {
+                                            $myClass->alert('Ticket inserido com sucesso!');
+                                            $_SESSION['user']['loadPage']['page'] = 'Inicial.php';
+                                            $_SESSION['user']['loadPage']['div'] = 'dados';
+                                        }
+                                        else
+                                        {
+                                            $myClass->alert('Ocorreu algum erro no processamento da sua solitação. Tente novamente!');
+                                        }
+                                    }
+                                    else
+                                    {
+                                        $myClass->alert('Valor inválido');
+                                    }
+                                }
+                                else
+                                {
+                                    $myClass->alert('Você deve informar o valor do ticket');
+                                }
+                            }
+                            else
+                            {
+                                $myClass->alert('Você deve selecinar ao menos um usuário');
+                            }
+                        }
+                        else
+                        {
+                            $myClass->alert('Grupo Inválido');
+                        }
+                    }
+                    else
+                    {
+                        $myClass->alert('Você deve selecinar um Grupo');
+                    }
+                }
+                else
+                {
+                    $myClass->alert('Descrição inválida');
+                }
+            }
+            else
+            {
+                $myClass->alert('Você deve informar uma Descrição');
+            }
+        }
+        else
+        {
+            $myClass->alert('Título inválido');
+        }
+    }
+    else
+    {
+        $myClass->alert('Você deve informar um Título');
+    }
+    
+    
+
+    $myClass->loadPagina('../Index.php');
+}
 else if(isset($_POST['page']))
 {
     $page = split('-', $_POST['page']);

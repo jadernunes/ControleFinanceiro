@@ -7,14 +7,14 @@ $tempolimite = 5;
 
 
 //// Turn off all error reporting
-//error_reporting(0);
+error_reporting(0);
 
 //// Report simple running errors
 //error_reporting(E_ERROR);
 
 // Reporting E_NOTICE can be good too (to report uninitialized
 // variables or catch variable name misspellings ...)
-error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+//error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 
 //// Report all errors except E_NOTICE
 //// This is the default value set in php.ini
